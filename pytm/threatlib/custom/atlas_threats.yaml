@@ -1,0 +1,44 @@
+- id: AT-001
+  description: Data Poisoning Attack
+  condition: |
+    isinstance(element, Dataset) and element.isPublic and not element.isValidated
+  severity: High
+  likelihood: Medium
+  impact: High
+  mitigation: Validate and monitor datasets for integrity and authenticity.
+
+- id: AT-002
+  description: Model Inversion Attack
+  condition: |
+    isinstance(element, AIModel) and element.isExposed and element.isTrainedWithSensitiveData
+  severity: Critical
+  likelihood: Low
+  impact: Critical
+  mitigation: Implement differential privacy and limit model exposure.
+
+- id: AT-003
+  description: Adversarial Example Attack
+  condition: |
+    isinstance(element, AIModel) and element.isExposed and not element.hasRobustTraining
+  severity: High
+  likelihood: Medium
+  impact: High
+  mitigation: Use adversarial training techniques and input validation.
+
+- id: AT-004
+  description: Model Theft Attack
+  condition: |
+    isinstance(element, AIModel) and element.isExposed
+  severity: Medium
+  likelihood: Medium
+  impact: Medium
+  mitigation: Implement query rate limiting and response obfuscation.
+
+- id: AT-005
+  description: Unauthorized Model Access
+  condition: |
+    isinstance(element, AIModel) and element.isExposed and not element.authenticatesSource
+  severity: High
+  likelihood: High
+  impact: High
+  mitigation: Require authentication and authorization for model access.

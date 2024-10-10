@@ -1,0 +1,35 @@
+- id: OWASP-API-1
+  description: Broken Object Level Authorization
+  condition: |
+    isinstance(element, Dataflow) and 'API' in element.protocol and not element.authenticatesSource
+  severity: Critical
+  likelihood: High
+  impact: Critical
+  mitigation: Enforce authorization checks for all API endpoints.
+
+- id: OWASP-API-2
+  description: Excessive Data Exposure
+  condition: |
+    isinstance(element, Dataflow) and 'API' in element.protocol and element.data == 'Sensitive Data' and not element.isEncrypted
+  severity: High
+  likelihood: Medium
+  impact: High
+  mitigation: Ensure that APIs do not expose more data than necessary.
+
+- id: OWASP-LLM-1
+  description: Prompt Injection
+  condition: |
+    isinstance(element, AIModel) and element.isExposed and not element.hasInputValidation
+  severity: High
+  likelihood: High
+  impact: High
+  mitigation: Implement input validation and context isolation in LLMs.
+
+- id: OWASP-LLM-2
+  description: Data Leakage via Model Outputs
+  condition: |
+    isinstance(element, AIModel) and element.isExposed and element.isTrainedWithSensitiveData and not element.hasOutputFiltering
+  severity: High
+  likelihood: Medium
+  impact: High
+  mitigation: Implement output filtering and limit the information revealed by the model.
